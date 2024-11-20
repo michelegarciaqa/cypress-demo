@@ -25,6 +25,11 @@ jobs:
       run: |
         npm install
 
+    - name: Ensure Cypress has correct permissions
+      run: |
+        chmod +x ./node_modules/.bin/cypress
+        chmod -R 777 ./node_modules
+
     - name: Run Cypress tests
       run: |
         npx cypress run
