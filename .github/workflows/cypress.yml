@@ -11,26 +11,20 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    
+
     steps:
-    # Passo 1: Check-out do código
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Passo 2: Instalar as dependências
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
     - name: Install dependencies
       run: |
         npm install
 
-    # Passo 3: Rodar os testes do Cypress
     - name: Run Cypress tests
       run: |
         npx cypress run
-
-    # Passo 4: (Opcional) Publicar relatório do Cypress
-    - name: Upload Cypress Test Results
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        name: cypress-reports
-        path: cypress/reports/*.html
