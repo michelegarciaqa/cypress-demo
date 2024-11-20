@@ -25,6 +25,14 @@ jobs:
       run: |
         npm install
 
+    - name: Cache Cypress binary
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/Cypress
+        key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-cypress-
+
     - name: Ensure Cypress has correct permissions
       run: |
         chmod +x ./node_modules/.bin/cypress
